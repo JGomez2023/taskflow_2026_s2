@@ -8,6 +8,7 @@ export const TEMPLATE_DB = path.join(TMP, 'template.db');
 export default function globalSetup(): void {
   fs.rmSync(TMP, { recursive: true, force: true });
   fs.mkdirSync(TMP, { recursive: true });
+  fs.closeSync(fs.openSync(TEMPLATE_DB, 'w'));
 
   execSync('npx prisma db push --skip-generate --accept-data-loss', {
     cwd: path.join(__dirname, '..'),
